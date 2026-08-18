@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Laboratório de Expansão e Compressão</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    color:#0a2550;
+}
+
+header{
+    background:linear-gradient(135deg,#031c45,#073d7a);
+    color:white;
+    padding:20px 35px;
+    border-bottom:6px solid #e8a500;
+}
+
+header h1{
+    margin:0;
+    font-size:30px;
+}
+
+header p{
+    margin:6px 0 0 0;
+    opacity:.9;
+}
+
+.container{
+    display:grid;
+    grid-template-columns: 420px 1fr;
+    gap:20px;
+    padding:20px;
+    max-width:1500px;
+    margin:auto;
+}
+
+/* =========================
+   PISTÃO
+========================= */
+
+.left-panel{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+}
+
+.left-panel h2{
+    text-align:center;
+    margin-top:0;
+}
+
+.cylinder-area{
+    height:460px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+}
+
+.cylinder{
+    width:230px;
+    height:390px;
+    border:7px solid #33495f;
+    border-top:none;
+    border-radius:0 0 18px 18px;
+    position:relative;
+    overflow:hidden;
+    background:#eef2f5;
+}
+
+.gas{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:65%;
+    background:linear-gradient(
+        rgba(255,190,80,.45),
+        rgba(255,110,30,.72)
+    );
+    transition:height .12s linear;
+}
+
+.particles{
+    position:absolute;
+    inset:0;
+}
+
+.particle{
+    width:8px;
+    height:8px;
+    background:#d63c18;
+    border-radius:50%;
+    position:absolute;
+    opacity:.8;
+}
+
+.piston{
+    position:absolute;
+    left:0;
+    width:100%;
+    height:34px;
+    background:linear-gradient(#777,#ddd,#777);
+    border:2px solid #333;
+    transition:bottom .12s linear;
+}
+
+.rod{
+    position:absolute;
+    width:28px;
+    height:160px;
+    background:linear-gradient(90deg,#555,#ccc,#555);
+    left:50%;
+    transform:translateX(-50%);
+    bottom:65%;
+    transition:bottom .12s linear;
+}
+
+.boundary-label{
+    position:absolute;
+    right:2px;
+    top:120px;
+    font-size:13px;
+    color:#d47c00;
+    font-weight:bold;
+}
+
+.arrow-work{
+    position:absolute;
+    left:15px;
+    top:120px;
+    width:130px;
+    text-align:center;
+    font-weight:bold;
+    font-size:14px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
+
+button{
+    flex:1;
+    border:none;
+    padding:16px;
+    font-size:16px;
+    font-weight:bold;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.expand{
+    background:#148b48;
+    color:white;
+}
+
+.compress{
+    background:#c93832;
+    color:white;
+}
+
+.reset{
+    margin-top:10px;
+    width:100%;
+    background:#e7ebf0;
+    color:#142f55;
+}
+
+/* =========================
+   DIREITA
+========================= */
+
+.right-panel{
+    display:grid;
+    gap:18px;
+}
+
+.process-status{
+    background:white;
+    border-radius:18px;
+    padding:16px 22px;
+    box-shadow:0 5px 20px rgba(0,0,0,.10);
+}
+
+.process-name{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.process-description{
+    margin-top:5px;
+    color:#555;
+}
+
+.variables{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.card{
+    background:white;
+    border-radius:14px;
+    padding:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.09);
+    border-left:6px solid #e3a000;
+}
+
+.card .name{
+    font-size:14px;
+    font-weight:bold;
+    color:#536475;
+}
+
+.card .value{
+    font-size:25px;
+    font-weight:bold;
+    margin-top:8px;
+    color:#062c64;
+}
+
+.card .unit{
+    font-size:13px;
+    color:#777;
+}
+
+/* =========================
+   ENERGIA
+========================= */
+
+.energy-box{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.energy{
+    background:white;
+    border-radius:14px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.09);
+}
+
+.energy h3{
+    margin-top:0;
+}
+
+.positive{
+    color:#16813e;
+}
+
+.negative{
+    color:#d02d2d;
+}
+
+.neutral{
+    color:#555;
+}
+
+/* =========================
+   GRÁFICO
+========================= */
+
+.graph-box{
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.10);
+}
+
+canvas{
+    width:100%;
+    height:270px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+/* =========================
+   LEGENDA
+========================= */
+
+.legend{
+    background:#082e61;
+    color:white;
+    padding:15px 20px;
+    border-radius:14px;
+    line-height:1.6;
+}
+
+.legend strong{
+    color:#ffc43d;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    .variables{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .variables,
+    .energy-box{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Laboratório de Expansão e Compressão</h1>
+    <p>Sistema fechado • Trabalho • Calor • Energia • Temperatura</p>
+</header>
+
+<div class="container">
+
+<!-- ===============================
+     PISTÃO
+================================ -->
+
+<section class="left-panel">
+
+<h2>Sistema Cilindro–Pistão</h2>
+
+<div class="cylinder-area">
+
+<div class="arrow-work" id="workArrow">
+    Estado inicial
+</div>
+
+<div class="cylinder">
+
+    <div class="gas" id="gas">
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <div class="piston" id="piston"></div>
+    <div class="rod" id="rod"></div>
+
+</div>
+
+<div class="boundary-label">
+    ← fronteira móvel
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="compress" onclick="startCompression()">
+⬇ COMPRIMIR
+</button>
+
+<button class="expand" onclick="startExpansion()">
+⬆ EXPANDIR
+</button>
+
+</div>
+
+<button class="reset" onclick="resetSimulation()">
+↻ Reiniciar
+</button>
+
+</section>
+
+
+<!-- ===============================
+     PAINEL DE DADOS
+================================ -->
+
+<section class="right-panel">
+
+<div class="process-status">
+
+<div class="process-name" id="processName">
+Sistema em equilíbrio
+</div>
+
+<div class="process-description" id="processDescription">
+Escolha compressão ou expansão.
+</div>
+
+</div>
+
+
+<div class="variables">
+
+<div class="card">
+<div class="name">VOLUME</div>
+<div class="value" id="volume">10.00</div>
+<div class="unit">L</div>
+</div>
+
+<div class="card">
+<div class="name">PRESSÃO</div>
+<div class="value" id="pressure">249.4</div>
+<div class="unit">kPa</div>
+</div>
+
+<div class="card">
+<div class="name">TEMPERATURA</div>
+<div class="value" id="temperature">300.0</div>
+<div class="unit">K</div>
+</div>
+
+<div class="card">
+<div class="name">TEMPERATURA</div>
+<div class="value" id="temperatureC">26.9</div>
+<div class="unit">°C</div>
+</div>
+
+<div class="card">
+<div class="name">ENERGIA INTERNA</div>
+<div class="value" id="internalEnergy">3.74</div>
+<div class="unit">kJ</div>
+</div>
+
+<div class="card">
+<div class="name">VARIAÇÃO DE VOLUME</div>
+<div class="value" id="deltaVolume">0.00</div>
+<div class="unit">L</div>
+</div>
+
+</div>
+
+
+<div class="energy-box">
+
+<div class="energy">
+<h3>TRABALHO</h3>
+<div class="value" id="work">0.000 kJ</div>
+<div id="workMeaning">W = 0</div>
+</div>
+
+<div class="energy">
+<h3>CALOR</h3>
+<div class="value" id="heat">0.000 kJ</div>
+<div id="heatMeaning">Q = 0</div>
+</div>
+
+<div class="energy">
+<h3>Δ ENERGIA INTERNA</h3>
+<div class="value" id="deltaU">0.000 kJ</div>
+<div id="deltaUMeaning">ΔU = 0</div>
+</div>
+
+</div>
+
+
+<div class="graph-box">
+
+<h2>Diagrama P × V</h2>
+
+<canvas id="pvGraph"
+width="800"
+height="280">
+</canvas>
+
+</div>
+
+
+<div class="legend">
+
+<strong>Convenção adotada no livro:</strong><br>
+
+W &gt; 0 → sistema realiza trabalho sobre a vizinhança.<br>
+W &lt; 0 → vizinhança realiza trabalho sobre o sistema.<br>
+
+Q &gt; 0 → calor entra no sistema.<br>
+Q &lt; 0 → calor sai do sistema.
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   MODELO FÍSICO
+========================================== */
+
+/*
+Sistema fechado contendo 1 mol de gás ideal.
+
+R = constante universal dos gases.
+
+Cv = capacidade térmica molar aproximada
+para gás ideal monoatômico.
+
+Convenção:
+
+ΔU = Q - W
+
+W > 0 → trabalho realizado PELO sistema.
+Q > 0 → calor recebido PELO sistema.
+*/
+
+const n = 1;
+
+const R = 8.314;       // J/mol.K
+const Cv = 1.5 * R;    // J/mol.K
+
+const Tenv = 300;      // K
+
+let V = 0.010;         // m³ = 10 L
+let T = 300;           // K
+
+let P = n * R * T / V;
+
+let U = n * Cv * T;
+
+let initialV = V;
+
+let totalWork = 0;
+let totalHeat = 0;
+let initialU = U;
+
+let running = false;
+
+let points = [];
+
+
+/* ==========================================
+   ELEMENTOS
+========================================== */
+
+const piston =
+document.getElementById("piston");
+
+const rod =
+document.getElementById("rod");
+
+const gas =
+document.getElementById("gas");
+
+const canvas =
+document.getElementById("pvGraph");
+
+const ctx =
+canvas.getContext("2d");
+
+
+/* ==========================================
+   PARTÍCULAS
+========================================== */
+
+function createParticles(){
+
+    const container =
+    document.getElementById("particles");
+
+    container.innerHTML = "";
+
+    for(let i=0;i<30;i++){
+
+        const p =
+        document.createElement("div");
+
+        p.className="particle";
+
+        p.style.left =
+        Math.random()*90+"%";
+
+        p.style.top =
+        Math.random()*90+"%";
+
+        container.appendChild(p);
+
+    }
+
+}
+
+createParticles();
+
+
+/* ==========================================
+   CÁLCULO DE UM PASSO
+========================================== */
+
+function processStep(direction){
+
+    /*
+    direction:
+    +1 expansão
+    -1 compressão
+    */
+
+    const oldV = V;
+    const oldP = P;
+
+    const dV =
+    direction * 0.000045;
+
+    const newV =
+    Math.min(
+        0.014,
+        Math.max(
+            0.006,
+            V + dV
+        )
+    );
+
+    if(newV === V){
+        stopProcess();
+        return;
+    }
+
+
+    /*
+    Trabalho aproximado no pequeno passo:
+    dW = P dV
+    */
+
+    const dVreal =
+    newV - oldV;
+
+    const dW =
+    oldP * dVreal;
+
+
+    /*
+    Troca térmica simplificada com ambiente.
+
+    Quando gás aquece acima do ambiente,
+    tende a perder calor.
+
+    Quando esfria abaixo do ambiente,
+    tende a receber calor.
+    */
+
+    const heatCoefficient = 0.8;
+
+    const dQ =
+    heatCoefficient *
+    (Tenv - T);
+
+
+    /*
+    Primeira Lei:
+
+    ΔU = Q - W
+    */
+
+    const dU =
+    dQ - dW;
+
+
+    U += dU;
+
+    T =
+    U /
+    (n * Cv);
+
+    V =
+    newV;
+
+    P =
+    n * R * T / V;
+
+
+    totalWork += dW;
+    totalHeat += dQ;
+
+
+    points.push({
+        V: V*1000,
+        P: P/1000
+    });
+
+
+    updateDisplay();
+
+}
+
+
+/* ==========================================
+   EXPANSÃO
+========================================== */
+
+function startExpansion(){
+
+    if(running) return;
+
+    running = true;
+
+    document.getElementById("processName").innerHTML =
+    "EXPANSÃO";
+
+    document.getElementById("processDescription").innerHTML =
+    "O gás empurra o pistão. O volume aumenta e o sistema realiza trabalho sobre a vizinhança.";
+
+    document.getElementById("workArrow").innerHTML =
+    "↑ Trabalho sai do sistema";
+
+
+    const interval =
+    setInterval(()=>{
+
+        if(!running ||
+           V >= 0.014){
+
+            clearInterval(interval);
+            stopProcess();
+            return;
+
+        }
+
+        processStep(+1);
+
+    },60);
+
+}
+
+
+/* ==========================================
+   COMPRESSÃO
+========================================== */
+
+function startCompression(){
+
+    if(running) return;
+
+    running = true;
+
+    document.getElementById("processName").innerHTML =
+    "COMPRESSÃO";
+
+    document.getElementById("processDescription").innerHTML =
+    "A vizinhança empurra o pistão. O volume diminui e trabalho é realizado sobre o sistema.";
+
+    document.getElementById("workArrow").innerHTML =
+    "↓ Trabalho entra no sistema";
+
+
+    const interval =
+    setInterval(()=>{
+
+        if(!running ||
+           V <= 0.006){
+
+            clearInterval(interval);
+            stopProcess();
+            return;
+
+        }
+
+        processStep(-1);
+
+    },60);
+
+}
+
+
+function stopProcess(){
+
+    running = false;
+
+}
+
+
+/* ==========================================
+   ATUALIZAÇÃO DO PISTÃO
+========================================== */
+
+function updatePiston(){
+
+    const Vmin = 0.006;
+    const Vmax = 0.014;
+
+    const fraction =
+    (V - Vmin) /
+    (Vmax - Vmin);
+
+    const gasPercent =
+    30 + fraction*55;
+
+    gas.style.height =
+    gasPercent+"%";
+
+    piston.style.bottom =
+    gasPercent+"%";
+
+    rod.style.bottom =
+    gasPercent+"%";
+
+}
+
+
+/* ==========================================
+   PAINEL
+========================================== */
+
+function updateDisplay(){
+
+    document.getElementById("volume")
+    .innerText =
+    (V*1000).toFixed(2);
+
+    document.getElementById("pressure")
+    .innerText =
+    (P/1000).toFixed(1);
+
+    document.getElementById("temperature")
+    .innerText =
+    T.toFixed(1);
+
+    document.getElementById("temperatureC")
+    .innerText =
+    (T-273.15).toFixed(1);
+
+    document.getElementById("internalEnergy")
+    .innerText =
+    (U/1000).toFixed(3);
+
+    document.getElementById("deltaVolume")
+    .innerText =
+    ((V-initialV)*1000)
+    .toFixed(2);
+
+
+    document.getElementById("work")
+    .innerText =
+    (totalWork/1000)
+    .toFixed(3)+" kJ";
+
+    document.getElementById("heat")
+    .innerText =
+    (totalHeat/1000)
+    .toFixed(3)+" kJ";
+
+    document.getElementById("deltaU")
+    .innerText =
+    ((U-initialU)/1000)
+    .toFixed(3)+" kJ";
+
+
+    /* trabalho */
+
+    const wm =
+    document.getElementById("workMeaning");
+
+    if(totalWork > 0){
+
+        wm.innerHTML =
+        "W > 0 → sistema realizou trabalho";
+
+        wm.className =
+        "positive";
+
+    }
+
+    else if(totalWork < 0){
+
+        wm.innerHTML =
+        "W < 0 → trabalho realizado sobre o sistema";
+
+        wm.className =
+        "negative";
+
+    }
+
+    else{
+
+        wm.innerHTML="W = 0";
+
+    }
+
+
+    /* calor */
+
+    const hm =
+    document.getElementById("heatMeaning");
+
+    if(totalHeat > 0){
+
+        hm.innerHTML =
+        "Q > 0 → calor entrou no sistema";
+
+        hm.className =
+        "positive";
+
+    }
+
+    else if(totalHeat < 0){
+
+        hm.innerHTML =
+        "Q < 0 → calor saiu do sistema";
+
+        hm.className =
+        "negative";
+
+    }
+
+    else{
+
+        hm.innerHTML="Q = 0";
+
+    }
+
+
+    updatePiston();
+    drawGraph();
+
+}
+
+
+/* ==========================================
+   GRÁFICO P-V
+========================================== */
+
+function drawGraph(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    const margin = 55;
+
+    /* eixos */
+
+    ctx.strokeStyle="#19385f";
+    ctx.lineWidth=2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        margin,
+        15
+    );
+
+    ctx.lineTo(
+        margin,
+        canvas.height-margin
+    );
+
+    ctx.lineTo(
+        canvas.width-15,
+        canvas.height-margin
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle="#19385f";
+    ctx.font="16px Arial";
+
+    ctx.fillText(
+        "P (kPa)",
+        10,
+        25
+    );
+
+    ctx.fillText(
+        "V (L)",
+        canvas.width-60,
+        canvas.height-15
+    );
+
+
+    if(points.length < 2)
+        return;
+
+
+    const minV=6;
+    const maxV=14;
+
+    let pressures =
+    points.map(p=>p.P);
+
+    let minP =
+    Math.min(...pressures)*0.9;
+
+    let maxP =
+    Math.max(...pressures)*1.1;
+
+    if(maxP-minP < 20)
+        maxP=minP+20;
+
+
+    function mapX(v){
+
+        return margin +
+        (v-minV)/
+        (maxV-minV) *
+        (canvas.width-margin-30);
+
+    }
+
+
+    function mapY(p){
+
+        return
+        canvas.height-margin -
+        (p-minP)/
+        (maxP-minP) *
+        (canvas.height-margin-30);
+
+    }
+
+
+    ctx.strokeStyle="#d27a00";
+    ctx.lineWidth=4;
+
+    ctx.beginPath();
+
+    points.forEach((p,i)=>{
+
+        const x =
+        mapX(p.V);
+
+        const y =
+        mapY(p.P);
+
+        if(i===0)
+            ctx.moveTo(x,y);
+        else
+            ctx.lineTo(x,y);
+
+    });
+
+    ctx.stroke();
+
+
+    /* ponto atual */
+
+    const last =
+    points[points.length-1];
+
+    ctx.beginPath();
+
+    ctx.arc(
+        mapX(last.V),
+        mapY(last.P),
+        7,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle="#082e61";
+
+    ctx.fill();
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetSimulation(){
+
+    running=false;
+
+    V=0.010;
+    T=300;
+
+    P=
+    n*R*T/V;
+
+    U=
+    n*Cv*T;
+
+    initialV=V;
+    initialU=U;
+
+    totalWork=0;
+    totalHeat=0;
+
+    points=[];
+
+    points.push({
+        V:V*1000,
+        P:P/1000
+    });
+
+    document.getElementById("processName")
+    .innerHTML =
+    "Sistema em equilíbrio";
+
+    document.getElementById("processDescription")
+    .innerHTML =
+    "Escolha compressão ou expansão.";
+
+    document.getElementById("workArrow")
+    .innerHTML =
+    "Estado inicial";
+
+    updateDisplay();
+
+}
+
+
+resetSimulation();
+
+</script>
+
+</body>
+</html>
