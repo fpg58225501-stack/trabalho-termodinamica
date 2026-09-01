@@ -16,12 +16,8 @@ body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     background:#eef3f8;
-    color:#092e5b;
+    color:#0a2e58;
 }
-
-/* =====================================================
-   CABEÇALHO
-===================================================== */
 
 header{
     background:linear-gradient(135deg,#031a40,#075080);
@@ -42,7 +38,7 @@ header h1{
 
 header p{
     margin:6px 0 0;
-    color:#d8e5ee;
+    color:#d9e6ef;
 }
 
 .author{
@@ -51,19 +47,15 @@ header p{
     white-space:nowrap;
 }
 
-/* =====================================================
-   CONTAINER
-===================================================== */
-
 .main{
     max-width:1450px;
     margin:auto;
     padding:20px;
 }
 
-/* =====================================================
+/* ===============================
    ABAS
-===================================================== */
+================================ */
 
 .tabs{
     display:grid;
@@ -74,36 +66,35 @@ header p{
 
 .tab{
     border:none;
-    border-radius:12px;
+    border-radius:11px;
     padding:15px;
-    font-weight:bold;
     font-size:16px;
+    font-weight:bold;
     cursor:pointer;
-    background:#dfe8ef;
-    color:#143859;
+    background:#dce6ed;
+    color:#153b5d;
 }
 
 .tab.active{
-    background:#0b6da7;
+    background:#0a70aa;
     color:white;
 }
 
-/* =====================================================
+/* ===============================
    LAYOUT
-===================================================== */
+================================ */
 
 .lab{
     display:grid;
-    grid-template-columns:minmax(560px,1.35fr) minmax(390px,.8fr);
+    grid-template-columns:minmax(600px,1.35fr) minmax(380px,.8fr);
     gap:20px;
 }
 
-.left,
-.right-card{
+.panel{
     background:white;
     border-radius:18px;
-    box-shadow:0 5px 18px rgba(0,0,0,.09);
     padding:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.09);
 }
 
 .right{
@@ -111,19 +102,18 @@ header p{
     gap:15px;
 }
 
-/* =====================================================
-   ÁREA VISUAL
-===================================================== */
+/* ===============================
+   VISUAL
+================================ */
 
 .visual{
-    height:470px;
-    border-radius:17px;
-    border:3px solid #284b69;
-
-    background:
-        linear-gradient(#edf8ff,#d9edf8);
-
     position:relative;
+    height:520px;
+    border-radius:17px;
+    border:3px solid #294e6d;
+    background:
+        linear-gradient(#edf8ff,#d7ecf8);
+
     overflow:hidden;
 }
 
@@ -133,110 +123,93 @@ header p{
     top:15px;
     font-weight:bold;
     color:#153f64;
+    z-index:20;
 }
 
-/* =====================================================
+/* ===============================
    LINEAR
-===================================================== */
+================================ */
 
 .linear-system{
     position:absolute;
-    inset:60px 30px 30px 30px;
+    inset:70px 30px 25px 30px;
 }
 
 .linear-base{
     position:absolute;
-    bottom:100px;
     left:5%;
     right:5%;
+    bottom:110px;
     height:10px;
-    background:#6d777e;
+    background:#778188;
+}
+
+.fixed-support{
+    position:absolute;
+    left:7%;
+    bottom:95px;
+    width:48px;
+    height:120px;
+    background:#414c54;
 }
 
 .bar{
     position:absolute;
     left:12%;
-    bottom:125px;
-    height:62px;
-    width:65%;
+    bottom:137px;
 
-    border:4px solid #444;
+    width:65%;
+    height:62px;
+
+    border:4px solid #474e53;
     border-radius:8px;
 
     background:
-        linear-gradient(90deg,#72808a,#bec5c8,#6d777e);
-
-    transform-origin:left center;
+        linear-gradient(90deg,#717f89,#c5cbce,#6c767d);
 
     transition:
         width .5s ease,
         background .4s;
 }
 
-.fixed-support{
-    position:absolute;
-    left:8%;
-    bottom:87px;
-    width:45px;
-    height:120px;
-
-    background:#3d4951;
-    border-radius:5px;
-}
-
 .linear-arrow{
     position:absolute;
-    bottom:137px;
-    font-size:40px;
-    color:#d9452c;
-    font-weight:bold;
-}
-
-.linear-arrow.right{
     right:7%;
-}
-
-.linear-label{
-    position:absolute;
-    bottom:205px;
-    left:13%;
+    bottom:145px;
+    font-size:42px;
+    color:#d7442d;
     font-weight:bold;
-    color:#244e70;
 }
 
-/* =====================================================
+/* ===============================
    SUPERFICIAL
-===================================================== */
+================================ */
 
 .surface-system{
     position:absolute;
-    inset:65px 30px 30px 30px;
-
+    inset:70px 30px 30px 30px;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.plate-original{
+.original-plate{
     position:absolute;
-
-    width:210px;
-    height:210px;
-
-    border:3px dashed #516475;
+    width:220px;
+    height:220px;
+    border:3px dashed #637383;
 }
 
 .plate{
     position:absolute;
+    width:220px;
+    height:220px;
 
-    width:210px;
-    height:210px;
-
-    border:5px solid #4d555a;
-    border-radius:5px;
+    border:5px solid #4f585e;
+    border-radius:6px;
 
     background:
-        linear-gradient(135deg,#aaa,#ddd,#888);
+        linear-gradient(135deg,#a9afb2,#e0e4e6,#888f93);
 
     transition:
         width .5s,
@@ -244,52 +217,104 @@ header p{
         background .4s;
 }
 
-.surface-dimension{
-    position:absolute;
-    bottom:15px;
-
-    font-weight:bold;
-    color:#254e70;
-}
-
-/* =====================================================
-   VOLUMÉTRICA — ESFERA E ANEL
-===================================================== */
+/* ===============================
+   ESFERA + ANEL
+================================ */
 
 .volume-system{
     position:absolute;
-    inset:55px 20px 20px 20px;
+    inset:50px 20px 15px 20px;
 }
 
-/* suporte do anel */
+/*
+Trilho visual central.
+A esfera vai exatamente nesse eixo.
+*/
 
-.ring-support{
+.center-axis{
     position:absolute;
     left:50%;
-    bottom:80px;
-    transform:translateX(-50%);
+    top:35px;
+    bottom:35px;
 
-    width:240px;
-    height:170px;
+    border-left:2px dashed rgba(39,79,108,.22);
 }
 
-.ring{
+/* ANEL COMPLETO */
+
+.ring-system{
+    position:absolute;
+    left:50%;
+    top:210px;
+
+    transform:translateX(-50%);
+
+    width:210px;
+    height:220px;
+}
+
+/*
+A esfera entra "atrás" da parte frontal do anel.
+Usamos duas camadas:
+ring-back fica atrás,
+ring-front fica na frente.
+*/
+
+.ring-back{
     position:absolute;
     left:50%;
     top:0;
+
     transform:translateX(-50%);
 
-    width:150px;
-    height:150px;
+    width:165px;
+    height:165px;
 
-    border:18px solid #5d6468;
+    border:20px solid #525c62;
     border-radius:50%;
 
-    background:transparent;
+    z-index:3;
 
     box-shadow:
-        inset 0 0 8px rgba(0,0,0,.3),
-        0 3px 5px rgba(0,0,0,.2);
+        inset 0 0 8px rgba(0,0,0,.4);
+}
+
+.ring-front{
+    position:absolute;
+    left:50%;
+    top:0;
+
+    transform:translateX(-50%);
+
+    width:165px;
+    height:165px;
+
+    border-radius:50%;
+
+    z-index:9;
+
+    pointer-events:none;
+
+    border:20px solid transparent;
+
+    border-bottom-color:#343d42;
+    border-left-color:#424c52;
+    border-right-color:#424c52;
+}
+
+.ring-hole{
+    position:absolute;
+    left:50%;
+    top:20px;
+
+    transform:translateX(-50%);
+
+    width:125px;
+    height:125px;
+
+    border-radius:50%;
+
+    background:rgba(232,245,252,.34);
 
     z-index:4;
 }
@@ -297,86 +322,98 @@ header p{
 .ring-leg{
     position:absolute;
     left:50%;
-    top:135px;
-
-    width:20px;
-    height:80px;
+    top:150px;
 
     transform:translateX(-50%);
 
-    background:#5d6468;
+    width:22px;
+    height:70px;
+
+    background:#525c62;
+
+    z-index:2;
 }
 
 .ring-base{
     position:absolute;
     left:50%;
-    bottom:-42px;
-
-    width:170px;
-    height:20px;
+    bottom:-18px;
 
     transform:translateX(-50%);
 
-    background:#555e63;
+    width:180px;
+    height:22px;
+
     border-radius:5px;
+
+    background:#4b555b;
 }
 
-/* esfera */
+/* ESFERA */
 
 .ball{
     position:absolute;
 
     left:50%;
-    top:35px;
-
-    width:105px;
-    height:105px;
+    top:55px;
 
     transform:translateX(-50%);
+
+    width:110px;
+    height:110px;
 
     border-radius:50%;
 
     background:
         radial-gradient(
-        circle at 30% 25%,
-        #f6f8fa,
-        #aeb6bb 35%,
-        #626b71 75%
+            circle at 30% 25%,
+            #f7f9fa,
+            #b8c0c4 35%,
+            #626c72 75%
         );
 
-    border:3px solid #454d52;
+    border:3px solid #465057;
 
     box-shadow:
-        0 7px 12px rgba(0,0,0,.25);
+        0 8px 15px rgba(0,0,0,.25);
 
-    z-index:7;
+    z-index:6;
 
     transition:
         top 1s ease,
         width .55s ease,
         height .55s ease,
         background .5s ease,
-        box-shadow .5s;
+        box-shadow .5s ease;
 }
 
-/* aquecedor */
+/*
+Ao atravessar o anel ela passa para trás do front layer.
+*/
+
+.ball.behind-ring{
+    z-index:5;
+}
+
+/* AQUECEDOR */
 
 .heater{
     position:absolute;
-    right:6%;
-    top:85px;
+    right:25px;
+    top:70px;
 
-    width:125px;
-    height:90px;
+    width:130px;
+    height:105px;
 
     border-radius:12px;
 
-    background:#3d4448;
-
-    text-align:center;
-    padding-top:48px;
+    background:#3d454a;
 
     color:white;
+    text-align:center;
+
+    padding-top:63px;
+
     font-weight:bold;
 }
 
@@ -384,11 +421,13 @@ header p{
     position:absolute;
     left:50%;
     top:-45px;
+
     transform:translateX(-50%);
 
-    font-size:60px;
+    font-size:62px;
 
     opacity:.2;
+
     transition:.4s;
 }
 
@@ -396,35 +435,97 @@ header p{
     opacity:1;
 }
 
-/* estado */
+/* STATUS ESFERA */
 
 .ball-state{
     position:absolute;
-    left:15px;
-    top:12px;
+    left:20px;
+    top:55px;
+
+    max-width:270px;
 
     background:#092f61;
     color:white;
 
-    border-radius:10px;
     padding:10px 14px;
 
+    border-radius:10px;
+
     font-weight:bold;
+    z-index:20;
 }
 
-/* =====================================================
-   CONTROLES
-===================================================== */
+/* ===============================
+   BOTÕES ESFERA
+================================ */
+
+.sphere-control-box{
+    margin-top:14px;
+
+    background:#f4f8fb;
+
+    border:1px solid #d9e4eb;
+
+    border-radius:13px;
+
+    padding:13px;
+}
+
+.sphere-control-title{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.sphere-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+}
+
+.action{
+    border:none;
+    border-radius:10px;
+    padding:13px 10px;
+
+    font-weight:bold;
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+.blue{
+    background:#0d74b0;
+    color:white;
+}
+
+.red{
+    background:#d84932;
+    color:white;
+}
+
+.green{
+    background:#188d53;
+    color:white;
+}
+
+.gray{
+    background:#dfe7ed;
+    color:#173b59;
+}
+
+/* ===============================
+   CONTROLES GERAIS
+================================ */
 
 .controls{
-    margin-top:18px;
+    margin-top:15px;
     display:grid;
-    gap:13px;
+    gap:12px;
 }
 
 .control{
-    background:#f3f7fa;
-    border:1px solid #dbe4eb;
+    background:#f4f8fb;
+    border:1px solid #dbe5ec;
     border-radius:12px;
     padding:13px 15px;
 }
@@ -434,7 +535,6 @@ header p{
     justify-content:space-between;
     align-items:center;
     gap:10px;
-
     margin-bottom:8px;
 }
 
@@ -443,146 +543,31 @@ header p{
 }
 
 .control-value{
-    font-weight:bold;
-    color:#d4442d;
     font-size:19px;
+    font-weight:bold;
+    color:#d4472f;
 }
 
 input[type=range]{
     width:100%;
 }
 
-select,
-input[type=number]{
+select{
     width:100%;
     padding:10px;
-    border:1px solid #b9c8d4;
+    border:1px solid #bac8d3;
     border-radius:8px;
     font-size:16px;
 }
 
-/* =====================================================
-   BOTÕES
-===================================================== */
-
-.buttons{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-}
-
-button.action{
-    border:none;
-    border-radius:10px;
-    padding:14px;
-
-    font-weight:bold;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.blue{
-    background:#0c74b1;
-    color:white;
-}
-
-.red{
-    background:#d84630;
-    color:white;
-}
-
-.green{
-    background:#188d52;
-    color:white;
-}
-
-.gray{
-    background:#e0e7ec;
-    color:#193c59;
-}
-
-/* =====================================================
+/* ===============================
    RESULTADOS
-===================================================== */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-}
-
-.result{
-    background:white;
-    border-radius:14px;
-    padding:15px;
-
-    border-left:6px solid #e2a100;
-    box-shadow:0 4px 13px rgba(0,0,0,.07);
-}
-
-.result-name{
-    font-size:12px;
-    font-weight:bold;
-    color:#647585;
-}
-
-.result-value{
-    margin-top:7px;
-    font-size:25px;
-    font-weight:bold;
-    color:#08346a;
-}
-
-.result-unit{
-    margin-top:3px;
-    color:#777;
-    font-size:12px;
-}
-
-/* =====================================================
-   FÓRMULA
-===================================================== */
-
-.formula{
-    text-align:center;
-    background:#082e60;
-    color:white;
-    border-radius:15px;
-    padding:18px;
-}
-
-.formula-title{
-    color:#ffc338;
-    font-weight:bold;
-}
-
-.formula-equation{
-    font-size:29px;
-    margin:10px 0;
-}
-
-/* =====================================================
-   EXPLICAÇÃO
-===================================================== */
-
-.explanation{
-    background:#fff4dc;
-    border:2px solid #e2ad39;
-
-    border-radius:14px;
-    padding:16px;
-
-    color:#513d08;
-    line-height:1.55;
-}
-
-/* STATUS */
+================================ */
 
 .status{
     background:white;
     border-radius:14px;
     padding:17px;
-
     box-shadow:0 4px 14px rgba(0,0,0,.08);
 }
 
@@ -592,49 +577,109 @@ button.action{
 }
 
 .status-text{
-    margin-top:5px;
-    color:#5e6872;
+    margin-top:6px;
+    color:#5d6872;
+    line-height:1.5;
 }
 
-/* esconder */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.result{
+    background:white;
+
+    border-radius:14px;
+    padding:15px;
+
+    border-left:6px solid #e1a000;
+
+    box-shadow:0 4px 13px rgba(0,0,0,.07);
+}
+
+.result-name{
+    font-size:12px;
+    font-weight:bold;
+    color:#667585;
+}
+
+.result-value{
+    margin-top:7px;
+    font-size:24px;
+    font-weight:bold;
+    color:#0a356b;
+}
+
+.result-unit{
+    margin-top:3px;
+    font-size:12px;
+    color:#777;
+}
+
+.formula{
+    background:#082e60;
+    color:white;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    padding:18px;
+}
+
+.formula-title{
+    color:#ffc338;
+    font-weight:bold;
+}
+
+.formula-equation{
+    margin:10px 0;
+    font-size:28px;
+}
+
+.explanation{
+    background:#fff4dc;
+
+    border:2px solid #e2ad39;
+
+    border-radius:14px;
+
+    padding:16px;
+
+    color:#513d08;
+
+    line-height:1.55;
+}
 
 .hidden{
-    display:none;
+    display:none !important;
 }
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
 
 @media(max-width:1000px){
 
     .lab{
         grid-template-columns:1fr;
     }
-
 }
 
-@media(max-width:650px){
+@media(max-width:680px){
 
     header{
         flex-direction:column;
         align-items:flex-start;
     }
 
-    .author{
-        white-space:normal;
-    }
-
     .tabs,
     .cards,
-    .buttons{
+    .sphere-buttons{
         grid-template-columns:1fr;
     }
 
     .visual{
-        height:430px;
+        height:500px;
     }
-
 }
 
 </style>
@@ -642,17 +687,11 @@ button.action{
 
 <body>
 
-
 <header>
 
 <div>
-
 <h1>Laboratório de Dilatação Térmica</h1>
-
-<p>
-Dilatação linear • superficial • volumétrica
-</p>
-
+<p>Dilatação linear • superficial • volumétrica</p>
 </div>
 
 <div class="author">
@@ -663,11 +702,6 @@ Desenvolvido por Fabrizio Porfirio
 
 
 <div class="main">
-
-
-<!-- =====================================================
-     ABAS
-===================================================== -->
 
 <div class="tabs">
 
@@ -688,25 +722,20 @@ DILATAÇÃO VOLUMÉTRICA
 
 <div class="lab">
 
-
-<!-- =====================================================
+<!-- ===============================
      ESQUERDA
-===================================================== -->
+================================ -->
 
-<section class="left">
-
+<section class="panel">
 
 <div class="visual">
-
 
 <div class="mode-title" id="modeTitle">
 Dilatação linear
 </div>
 
 
-<!-- ============================
-     LINEAR
-============================= -->
+<!-- LINEAR -->
 
 <div id="linearVisual"
      class="linear-system">
@@ -715,65 +744,51 @@ Dilatação linear
 
 <div class="fixed-support"></div>
 
-<div class="bar"
-     id="linearBar"></div>
+<div class="bar" id="linearBar"></div>
 
-<div class="linear-arrow right">
+<div class="linear-arrow">
 →
 </div>
 
-<div class="linear-label"
-     id="linearLabel">
-Comprimento inicial
-</div>
-
 </div>
 
 
-<!-- ============================
-     SUPERFICIAL
-============================= -->
+<!-- SUPERFICIAL -->
 
 <div id="surfaceVisual"
      class="surface-system hidden">
 
-<div class="plate-original"></div>
+<div class="original-plate"></div>
 
-<div class="plate"
-     id="plate"></div>
-
-<div class="surface-dimension"
-     id="surfaceDimension">
-
-Área inicial
-
-</div>
+<div class="plate" id="plate"></div>
 
 </div>
 
 
-<!-- ============================
-     VOLUME
-============================= -->
+<!-- VOLUMÉTRICA -->
 
 <div id="volumeVisual"
      class="volume-system hidden">
 
+<div class="center-axis"></div>
 
 <div class="ball-state"
      id="ballState">
 ESFERA FRIA
 </div>
 
-
 <div class="ball"
-     id="ball"></div>
+     id="ball">
+</div>
 
 
-<div class="ring-support">
+<div class="ring-system">
 
-<div class="ring"
-     id="ring"></div>
+<div class="ring-back"></div>
+
+<div class="ring-hole"></div>
+
+<div class="ring-front"></div>
 
 <div class="ring-leg"></div>
 
@@ -795,25 +810,55 @@ AQUECEDOR
 
 </div>
 
+</div>
+
+
+<!-- CONTROLES DA ESFERA IMEDIATAMENTE ABAIXO -->
+
+<div class="sphere-control-box hidden"
+     id="sphereControlBox">
+
+<div class="sphere-control-title">
+Experiência da esfera e do anel
+</div>
+
+<div class="sphere-buttons">
+
+<button class="action blue"
+        id="testCold">
+1. TESTAR ESFERA FRIA
+</button>
+
+<button class="action red"
+        id="heatBall">
+2. AQUECER ESFERA
+</button>
+
+<button class="action green"
+        id="testHot">
+3. TESTAR ESFERA AQUECIDA
+</button>
+
+<button class="action gray"
+        id="resetSphere">
+↻ REINICIAR
+</button>
+
+</div>
 
 </div>
 
 
-<!-- =====================================================
-     CONTROLES
-===================================================== -->
+<!-- CONTROLES GERAIS -->
 
 <div class="controls">
-
 
 <div class="control">
 
 <div class="control-top">
-
 <div class="control-name">
 Material
 </div>
-
 </div>
 
 <select id="material">
@@ -853,9 +898,7 @@ Temperatura
 
 <div class="control-value"
      id="tempValue">
-
 20 °C
-
 </div>
 
 </div>
@@ -871,8 +914,7 @@ value="20">
 </div>
 
 
-<div class="control"
-     id="dimensionControl">
+<div class="control">
 
 <div class="control-top">
 
@@ -898,73 +940,27 @@ value="10">
 
 </div>
 
-
-<!-- CONTROLES ESFERA -->
-
-<div class="buttons hidden"
-     id="sphereButtons">
-
-<button
-class="action blue"
-id="testCold">
-
-1. TESTAR ESFERA FRIA
-
-</button>
-
-<button
-class="action red"
-id="heatBall">
-
-2. AQUECER ESFERA
-
-</button>
-
-<button
-class="action green"
-id="testHot">
-
-3. TESTAR ESFERA AQUECIDA
-
-</button>
-
-<button
-class="action gray"
-id="resetSphere">
-
-↻ REINICIAR
-
-</button>
-
-</div>
-
-
 </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- ===============================
      DIREITA
-===================================================== -->
+================================ -->
 
 <section class="right">
-
 
 <div class="status">
 
 <div class="status-title"
      id="statusTitle">
-
-Corpo na temperatura inicial
-
+Temperatura inicial
 </div>
 
 <div class="status-text"
      id="statusText">
-
-Aumente a temperatura e observe a alteração das dimensões.
-
+Aumente a temperatura para observar a dilatação.
 </div>
 
 </div>
@@ -973,114 +969,90 @@ Aumente a temperatura e observe a alteração das dimensões.
 <div class="cards">
 
 <div class="result">
-
 <div class="result-name">
 TEMPERATURA INICIAL
 </div>
-
 <div class="result-value">
 20 °C
 </div>
-
 <div class="result-unit">
 T₀
 </div>
-
 </div>
 
 
 <div class="result">
-
 <div class="result-name">
 VARIAÇÃO DE TEMPERATURA
 </div>
-
 <div class="result-value"
      id="deltaTResult">
 0 °C
 </div>
-
 <div class="result-unit">
 ΔT
 </div>
-
 </div>
 
 
 <div class="result">
-
 <div class="result-name"
      id="initialName">
 COMPRIMENTO INICIAL
 </div>
-
 <div class="result-value"
      id="initialResult">
 10,000 m
 </div>
-
 <div class="result-unit"
      id="initialUnit">
 L₀
 </div>
-
 </div>
 
 
 <div class="result">
-
 <div class="result-name"
      id="variationName">
 DILATAÇÃO
 </div>
-
 <div class="result-value"
      id="variationResult">
 0,000 mm
 </div>
-
 <div class="result-unit"
      id="variationUnit">
 ΔL
 </div>
-
 </div>
 
 
 <div class="result">
-
 <div class="result-name"
      id="finalName">
 DIMENSÃO FINAL
 </div>
-
 <div class="result-value"
      id="finalResult">
 10,000 m
 </div>
-
 <div class="result-unit">
 valor final
 </div>
-
 </div>
 
 
 <div class="result">
-
 <div class="result-name">
 COEFICIENTE
 </div>
-
 <div class="result-value"
      id="coefficientResult">
 23 × 10⁻⁶
 </div>
-
 <div class="result-unit">
 °C⁻¹
 </div>
-
 </div>
 
 </div>
@@ -1094,15 +1066,11 @@ MODELO UTILIZADO
 
 <div class="formula-equation"
      id="formulaEquation">
-
-ΔL = L₀ α ΔT
-
+ΔL = L₀ · α · ΔT
 </div>
 
 <div id="coefficientInfo">
-
 α = coeficiente de dilatação linear
-
 </div>
 
 </div>
@@ -1111,10 +1079,9 @@ MODELO UTILIZADO
 <div class="explanation"
      id="explanation">
 
-Na dilatação linear analisamos principalmente a alteração de uma dimensão do corpo.
+Na dilatação linear analisamos principalmente a alteração do comprimento do corpo.
 
 </div>
-
 
 </section>
 
@@ -1125,9 +1092,9 @@ Na dilatação linear analisamos principalmente a alteração de uma dimensão d
 
 <script>
 
-/* ===========================================================
+/* ===============================
    VARIÁVEIS
-=========================================================== */
+================================ */
 
 const initialTemperature = 20;
 
@@ -1138,9 +1105,9 @@ let sphereHeated = false;
 let sphereBusy = false;
 
 
-/* ===========================================================
+/* ===============================
    ELEMENTOS
-=========================================================== */
+================================ */
 
 const tabs =
 document.querySelectorAll(".tab");
@@ -1157,13 +1124,6 @@ document.getElementById("dimension");
 const tempValue =
 document.getElementById("tempValue");
 
-const dimensionName =
-document.getElementById("dimensionName");
-
-const dimensionValue =
-document.getElementById("dimensionValue");
-
-
 const linearVisual =
 document.getElementById("linearVisual");
 
@@ -1172,6 +1132,9 @@ document.getElementById("surfaceVisual");
 
 const volumeVisual =
 document.getElementById("volumeVisual");
+
+const sphereControlBox =
+document.getElementById("sphereControlBox");
 
 const linearBar =
 document.getElementById("linearBar");
@@ -1188,13 +1151,10 @@ document.getElementById("heater");
 const ballState =
 document.getElementById("ballState");
 
-const sphereButtons =
-document.getElementById("sphereButtons");
 
-
-/* ===========================================================
+/* ===============================
    ABAS
-=========================================================== */
+================================ */
 
 tabs.forEach(tab=>{
 
@@ -1209,11 +1169,11 @@ tab.addEventListener("click",()=>{
     currentMode =
     tab.dataset.mode;
 
+
     linearVisual.classList.add("hidden");
     surfaceVisual.classList.add("hidden");
     volumeVisual.classList.add("hidden");
-
-    sphereButtons.classList.add("hidden");
+    sphereControlBox.classList.add("hidden");
 
 
     if(currentMode==="linear"){
@@ -1234,7 +1194,7 @@ tab.addEventListener("click",()=>{
 
         volumeVisual.classList.remove("hidden");
 
-        sphereButtons.classList.remove("hidden");
+        sphereControlBox.classList.remove("hidden");
 
         resetSphereExperiment();
 
@@ -1248,9 +1208,9 @@ tab.addEventListener("click",()=>{
 });
 
 
-/* ===========================================================
+/* ===============================
    SIMULAÇÃO
-=========================================================== */
+================================ */
 
 function updateSimulation(){
 
@@ -1272,36 +1232,36 @@ function updateSimulation(){
 
 
     document.getElementById(
-    "deltaTResult"
+        "deltaTResult"
     ).innerText =
     dT+" °C";
 
 
     document.getElementById(
-    "coefficientResult"
+        "coefficientResult"
     ).innerText =
-
-    material.value+
-    " × 10⁻⁶";
+    material.value+" × 10⁻⁶";
 
 
-    /* =======================================================
-       LINEAR
-    ======================================================= */
+    /* LINEAR */
 
     if(currentMode==="linear"){
 
         document.getElementById(
-        "modeTitle"
+            "modeTitle"
         ).innerText =
         "Dilatação linear";
 
 
-        dimensionName.innerText =
+        document.getElementById(
+            "dimensionName"
+        ).innerText =
         "Comprimento inicial";
 
 
-        dimensionValue.innerText =
+        document.getElementById(
+            "dimensionValue"
+        ).innerText =
         D.toFixed(1)
         .replace(".",",")
         +" m";
@@ -1316,13 +1276,13 @@ function updateSimulation(){
 
 
         document.getElementById(
-        "initialName"
+            "initialName"
         ).innerText =
         "COMPRIMENTO INICIAL";
 
 
         document.getElementById(
-        "initialResult"
+            "initialResult"
         ).innerText =
         D.toFixed(3)
         .replace(".",",")
@@ -1330,115 +1290,104 @@ function updateSimulation(){
 
 
         document.getElementById(
-        "initialUnit"
+            "initialUnit"
         ).innerText =
         "L₀";
 
 
         document.getElementById(
-        "variationName"
+            "variationName"
         ).innerText =
         "DILATAÇÃO LINEAR";
 
 
         document.getElementById(
-        "variationResult"
+            "variationResult"
         ).innerText =
-
-        (
-        deltaL*1000
-        )
+        (deltaL*1000)
         .toFixed(2)
         .replace(".",",")
         +" mm";
 
 
         document.getElementById(
-        "variationUnit"
+            "variationUnit"
         ).innerText =
         "ΔL";
 
 
         document.getElementById(
-        "finalName"
+            "finalName"
         ).innerText =
         "COMPRIMENTO FINAL";
 
 
         document.getElementById(
-        "finalResult"
+            "finalResult"
         ).innerText =
-
         finalL.toFixed(4)
         .replace(".",",")
         +" m";
 
 
         document.getElementById(
-        "formulaEquation"
+            "formulaEquation"
         ).innerText =
         "ΔL = L₀ · α · ΔT";
 
 
         document.getElementById(
-        "coefficientInfo"
+            "coefficientInfo"
         ).innerText =
         "α = coeficiente de dilatação linear";
 
 
         document.getElementById(
-        "explanation"
+            "explanation"
         ).innerText =
+        "Na dilatação linear observamos principalmente a alteração do comprimento do corpo.";
 
-        "O aumento da temperatura provoca expansão do comprimento. A animação amplia visualmente o efeito para facilitar sua observação.";
-
-
-        /*
-        amplificação visual
-        */
 
         let visual =
-        65 +
+        65+
         deltaL/D*5000;
 
 
         visual =
         Math.max(
-        55,
-        Math.min(
-        88,
-        visual
-        ));
+            55,
+            Math.min(
+                88,
+                visual
+            )
+        );
 
 
         linearBar.style.width =
         visual+"%";
 
-
-        updateThermalColor(
-        linearBar,T
-        );
-
     }
 
 
-    /* =======================================================
-       SUPERFICIAL
-    ======================================================= */
+    /* SUPERFICIAL */
 
     if(currentMode==="surface"){
 
         document.getElementById(
-        "modeTitle"
+            "modeTitle"
         ).innerText =
         "Dilatação superficial";
 
 
-        dimensionName.innerText =
+        document.getElementById(
+            "dimensionName"
+        ).innerText =
         "Área inicial";
 
 
-        dimensionValue.innerText =
+        document.getElementById(
+            "dimensionValue"
+        ).innerText =
         D.toFixed(1)
         .replace(".",",")
         +" m²";
@@ -1457,127 +1406,120 @@ function updateSimulation(){
 
 
         document.getElementById(
-        "initialName"
+            "initialName"
         ).innerText =
         "ÁREA INICIAL";
 
 
         document.getElementById(
-        "initialResult"
+            "initialResult"
         ).innerText =
-
         D.toFixed(3)
         .replace(".",",")
         +" m²";
 
 
         document.getElementById(
-        "initialUnit"
+            "initialUnit"
         ).innerText =
         "A₀";
 
 
         document.getElementById(
-        "variationName"
+            "variationName"
         ).innerText =
         "VARIAÇÃO DE ÁREA";
 
 
         document.getElementById(
-        "variationResult"
+            "variationResult"
         ).innerText =
-
         deltaA.toFixed(4)
         .replace(".",",")
         +" m²";
 
 
         document.getElementById(
-        "variationUnit"
+            "variationUnit"
         ).innerText =
         "ΔA";
 
 
         document.getElementById(
-        "finalName"
+            "finalName"
         ).innerText =
         "ÁREA FINAL";
 
 
         document.getElementById(
-        "finalResult"
+            "finalResult"
         ).innerText =
-
         finalA.toFixed(4)
         .replace(".",",")
         +" m²";
 
 
         document.getElementById(
-        "formulaEquation"
+            "formulaEquation"
         ).innerText =
         "ΔA = A₀ · β · ΔT";
 
 
         document.getElementById(
-        "coefficientInfo"
+            "coefficientInfo"
         ).innerText =
         "β ≈ 2α para sólidos isotrópicos";
 
 
         document.getElementById(
-        "explanation"
+            "explanation"
         ).innerText =
-
-        "Na dilatação superficial, duas dimensões do corpo aumentam. Por isso observamos crescimento da área da placa.";
+        "Na dilatação superficial duas dimensões da placa aumentam simultaneamente.";
 
 
         let scale =
-        1 +
-        beta*dT*25;
+        1+beta*dT*25;
 
 
         scale =
         Math.max(
-        .8,
-        Math.min(
-        1.35,
-        scale
-        ));
+            .8,
+            Math.min(
+                1.35,
+                scale
+            )
+        );
 
 
         plate.style.width =
-        210*scale+"px";
+        220*scale+"px";
 
 
         plate.style.height =
-        210*scale+"px";
-
-
-        updateThermalColor(
-        plate,T
-        );
+        220*scale+"px";
 
     }
 
 
-    /* =======================================================
-       VOLUMÉTRICA
-    ======================================================= */
+    /* VOLUME */
 
     if(currentMode==="volume"){
 
         document.getElementById(
-        "modeTitle"
+            "modeTitle"
         ).innerText =
         "Dilatação volumétrica — esfera e anel";
 
 
-        dimensionName.innerText =
+        document.getElementById(
+            "dimensionName"
+        ).innerText =
         "Volume inicial da esfera";
 
 
-        dimensionValue.innerText =
+        document.getElementById(
+            "dimensionValue"
+        ).innerText =
         D.toFixed(1)
         .replace(".",",")
         +" cm³";
@@ -1596,151 +1538,89 @@ function updateSimulation(){
 
 
         document.getElementById(
-        "initialName"
+            "initialName"
         ).innerText =
         "VOLUME INICIAL";
 
 
         document.getElementById(
-        "initialResult"
+            "initialResult"
         ).innerText =
-
         D.toFixed(3)
         .replace(".",",")
         +" cm³";
 
 
         document.getElementById(
-        "initialUnit"
+            "initialUnit"
         ).innerText =
         "V₀";
 
 
         document.getElementById(
-        "variationName"
+            "variationName"
         ).innerText =
-        "DILATAÇÃO VOLUMÉTRICA";
+        "VARIAÇÃO DE VOLUME";
 
 
         document.getElementById(
-        "variationResult"
+            "variationResult"
         ).innerText =
-
         deltaV.toFixed(4)
         .replace(".",",")
         +" cm³";
 
 
         document.getElementById(
-        "variationUnit"
+            "variationUnit"
         ).innerText =
         "ΔV";
 
 
         document.getElementById(
-        "finalName"
+            "finalName"
         ).innerText =
         "VOLUME FINAL";
 
 
         document.getElementById(
-        "finalResult"
+            "finalResult"
         ).innerText =
-
         finalV.toFixed(4)
         .replace(".",",")
         +" cm³";
 
 
         document.getElementById(
-        "formulaEquation"
+            "formulaEquation"
         ).innerText =
         "ΔV = V₀ · γ · ΔT";
 
 
         document.getElementById(
-        "coefficientInfo"
+            "coefficientInfo"
         ).innerText =
         "γ ≈ 3α para sólidos isotrópicos";
 
 
         document.getElementById(
-        "explanation"
+            "explanation"
         ).innerText =
-
-        "A esfera é um corpo tridimensional. Ao ser aquecida, seu volume e seu diâmetro aumentam. O anel permanece frio, permitindo visualizar o efeito da dilatação.";
-
-    }
-
-
-    updateStatus();
-
-}
-
-
-/* ===========================================================
-   COR TÉRMICA
-=========================================================== */
-
-function updateThermalColor(
-element,T
-){
-
-    const level =
-    Math.max(
-    0,
-    Math.min(
-    1,
-    (T-20)/480
-    ));
-
-
-    if(level<.15){
-
-        element.style.background =
-        "linear-gradient(90deg,#72808a,#c2c8cb,#6d777e)";
+        "Ao aquecer a esfera, todas as suas dimensões aumentam. O diâmetro cresce e, por isso, a esfera pode deixar de atravessar o anel.";
 
     }
-
-    else{
-
-        element.style.background =
-
-        `linear-gradient(
-        90deg,
-        rgb(${150+105*level},
-        ${160-70*level},
-        ${160-100*level}),
-        rgb(255,
-        ${200-100*level},
-        ${120-80*level})
-        )`;
-
-    }
-
-}
-
-
-/* ===========================================================
-   STATUS
-=========================================================== */
-
-function updateStatus(){
-
-    const T =
-    Number(temperature.value);
 
 
     if(T===20){
 
         document.getElementById(
-        "statusTitle"
+            "statusTitle"
         ).innerText =
         "Temperatura inicial";
 
 
         document.getElementById(
-        "statusText"
+            "statusText"
         ).innerText =
         "O corpo ainda não sofreu dilatação térmica.";
 
@@ -1749,74 +1629,76 @@ function updateStatus(){
     else{
 
         document.getElementById(
-        "statusTitle"
+            "statusTitle"
         ).innerText =
         "Corpo aquecido";
 
 
         document.getElementById(
-        "statusText"
+            "statusText"
         ).innerText =
-        "O aumento de temperatura produziu uma variação nas dimensões do corpo.";
+        "O aumento da temperatura produziu uma alteração nas dimensões do corpo.";
 
     }
 
 }
 
 
-/* ===========================================================
-   EXPERIÊNCIA ESFERA + ANEL
-=========================================================== */
+/* ===============================
+   RESET DA ESFERA
+================================ */
 
 function resetSphereExperiment(){
 
     sphereBusy=false;
-
     sphereHeated=false;
 
     temperature.value=20;
 
-    ball.style.transition =
-    "none";
-
-    ball.style.top =
-    "35px";
-
-    ball.style.width =
-    "105px";
-
-    ball.style.height =
-    "105px";
-
-    ball.style.background =
-    "radial-gradient(circle at 30% 25%,#f6f8fa,#aeb6bb 35%,#626b71 75%)";
-
-    ball.style.boxShadow =
-    "0 7px 12px rgba(0,0,0,.25)";
-
-    heater.classList.remove(
-    "active"
+    ball.classList.remove(
+        "behind-ring"
     );
 
-    ballState.innerText =
+    ball.style.transition="none";
+
+    ball.style.top="55px";
+
+    ball.style.width="110px";
+    ball.style.height="110px";
+
+    ball.style.background=
+    "radial-gradient(circle at 30% 25%,#f7f9fa,#b8c0c4 35%,#626c72 75%)";
+
+    ball.style.boxShadow=
+    "0 8px 15px rgba(0,0,0,.25)";
+
+    heater.classList.remove(
+        "active"
+    );
+
+    ballState.innerText=
     "ESFERA FRIA";
+
 
     setTimeout(()=>{
 
-        ball.style.transition =
-        "top 1s ease,width .55s ease,height .55s ease,background .5s ease,box-shadow .5s";
+        ball.style.transition=
+        "top 1s ease,width .55s ease,height .55s ease,background .5s ease,box-shadow .5s ease";
 
     },30);
+
 
     updateSimulation();
 
 }
 
 
-/* TESTAR FRIA */
+/* ===============================
+   TESTE FRIO
+================================ */
 
 document.getElementById(
-"testCold"
+    "testCold"
 ).addEventListener(
 "click",
 ()=>{
@@ -1826,29 +1708,59 @@ document.getElementById(
 
     sphereBusy=true;
 
-    ballState.innerText =
+    sphereHeated=false;
+
+    ballState.innerText=
     "TESTANDO ESFERA FRIA...";
 
-    ball.style.top =
-    "270px";
+
+    /*
+    primeiro vai para o centro do anel
+    */
+
+    ball.style.top=
+    "235px";
 
 
     setTimeout(()=>{
 
-        ballState.innerText =
-        "✓ A ESFERA FRIA PASSOU PELO ANEL";
+        /*
+        entra visualmente atrás da borda frontal
+        */
+
+        ball.classList.add(
+            "behind-ring"
+        );
+
+
+        /*
+        atravessa completamente
+        */
+
+        ball.style.top=
+        "380px";
+
+    },650);
+
+
+    setTimeout(()=>{
+
+        ballState.innerText=
+        "✓ A ESFERA FRIA ATRAVESSOU O ANEL";
 
         sphereBusy=false;
 
-    },1100);
+    },1500);
 
 });
 
 
-/* AQUECER */
+/* ===============================
+   AQUECER
+================================ */
 
 document.getElementById(
-"heatBall"
+    "heatBall"
 ).addEventListener(
 "click",
 ()=>{
@@ -1859,25 +1771,25 @@ document.getElementById(
     sphereBusy=true;
 
 
-    ball.style.top =
-    "70px";
-
-
-    heater.classList.add(
-    "active"
+    ball.classList.remove(
+        "behind-ring"
     );
 
 
-    ballState.innerText =
-    "AQUECENDO...";
+    ball.style.top=
+    "75px";
 
 
-    /*
-    força temperatura elevada
-    para demonstração
-    */
+    heater.classList.add(
+        "active"
+    );
 
-    temperature.value =
+
+    ballState.innerText=
+    "AQUECENDO A ESFERA...";
+
+
+    temperature.value=
     450;
 
 
@@ -1887,27 +1799,26 @@ document.getElementById(
 
 
         /*
-        aumento VISUAL propositalmente
-        amplificado
+        dilatação visual ampliada
         */
 
-        ball.style.width =
-        "125px";
+        ball.style.width=
+        "142px";
 
-        ball.style.height =
-        "125px";
-
-
-        ball.style.background =
-        "radial-gradient(circle at 30% 25%,#ffd99b,#ef7a37 38%,#a92818 78%)";
+        ball.style.height=
+        "142px";
 
 
-        ball.style.boxShadow =
-        "0 0 25px rgba(255,70,15,.65)";
+        ball.style.background=
+        "radial-gradient(circle at 30% 25%,#ffe5a9,#f47e37 40%,#a62a18 80%)";
 
 
-        ballState.innerText =
-        "🔥 ESFERA AQUECIDA — DILATADA";
+        ball.style.boxShadow=
+        "0 0 30px rgba(255,70,20,.7)";
+
+
+        ballState.innerText=
+        "🔥 ESFERA AQUECIDA E DILATADA";
 
 
         sphereBusy=false;
@@ -1920,23 +1831,23 @@ document.getElementById(
 });
 
 
-/* TESTAR QUENTE */
+/* ===============================
+   TESTE QUENTE
+================================ */
 
 document.getElementById(
-"testHot"
+    "testHot"
 ).addEventListener(
 "click",
 ()=>{
 
-    if(
-        sphereBusy
-    )
+    if(sphereBusy)
         return;
 
 
     if(!sphereHeated){
 
-        ballState.innerText =
+        ballState.innerText=
         "⚠ AQUEÇA A ESFERA PRIMEIRO";
 
         return;
@@ -1947,100 +1858,71 @@ document.getElementById(
     sphereBusy=true;
 
 
-    ballState.innerText =
+    ballState.innerText=
     "TESTANDO ESFERA AQUECIDA...";
 
 
+    ball.classList.remove(
+        "behind-ring"
+    );
+
+
     /*
-    Para no topo do anel.
+    desce até encostar no anel
+    mas NÃO entra
     */
 
-    ball.style.top =
-    "155px";
+    ball.style.top=
+    "205px";
 
 
     setTimeout(()=>{
 
-        ballState.innerText =
-        "✕ NÃO PASSOU — A ESFERA DILATOU";
+        ballState.innerText=
+        "✕ NÃO PASSOU — O DIÂMETRO AUMENTOU";
 
         sphereBusy=false;
 
-    },1050);
+    },1100);
 
 });
 
 
-/* RESET */
+/* ===============================
+   RESET
+================================ */
 
 document.getElementById(
-"resetSphere"
+    "resetSphere"
 ).addEventListener(
-"click",
-resetSphereExperiment
+    "click",
+    resetSphereExperiment
 );
 
 
-/* ===========================================================
+/* ===============================
    CONTROLES GERAIS
-=========================================================== */
+================================ */
 
 temperature.addEventListener(
-"input",
-()=>{
-
-    if(
-        currentMode==="volume"
-        &&
-        sphereHeated
-    ){
-
-        /*
-        tamanho visual relacionado
-        à temperatura.
-        Amplificado para ensino.
-        */
-
-        const T =
-        Number(temperature.value);
-
-
-        const scale =
-        1 +
-        (
-        T-20
-        )/430*.19;
-
-
-        ball.style.width =
-        105*scale+"px";
-
-
-        ball.style.height =
-        105*scale+"px";
-
-    }
-
-    updateSimulation();
-
-});
-
+    "input",
+    updateSimulation
+);
 
 material.addEventListener(
-"change",
-updateSimulation
+    "change",
+    updateSimulation
 );
-
 
 dimension.addEventListener(
-"input",
-updateSimulation
+    "input",
+    updateSimulation
 );
 
 
-/* ===========================================================
-   INÍCIO
-=========================================================== */
+/* ===============================
+   INICIAR
+================================ */
 
 updateSimulation();
 
