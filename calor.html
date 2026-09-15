@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Laboratório de Calor Sensível e Latente</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef4f8;
+    color:#12334d;
+}
+
+header{
+    background:linear-gradient(135deg,#082d54,#0878a8);
+    color:white;
+    padding:18px 30px;
+    border-bottom:5px solid #f2a900;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    margin:0;
+    font-size:28px;
+}
+
+header p{
+    margin:5px 0 0;
+    color:#dcebf3;
+}
+
+.author{
+    color:#ffd05a;
+    font-weight:bold;
+}
+
+main{
+    max-width:1450px;
+    margin:auto;
+    padding:18px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1.25fr .9fr;
+    gap:18px;
+}
+
+.panel{
+    background:white;
+    border-radius:16px;
+    padding:17px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+/* ==========================
+   ESTADO
+========================== */
+
+.phase-box{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#eef6fb;
+    padding:12px 15px;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+
+.phase-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.phase-type{
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:bold;
+    background:#1776a6;
+    color:white;
+}
+
+/* ==========================
+   EXPERIMENTO
+========================== */
+
+.experiment{
+    display:grid;
+    grid-template-columns:1fr 135px;
+    gap:10px;
+    height:430px;
+    position:relative;
+}
+
+/* recipiente */
+
+.lab-area{
+    position:relative;
+    background:linear-gradient(#eaf8ff,#d7edf8);
+    border:2px solid #aac4d3;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.container{
+    position:absolute;
+    width:310px;
+    height:275px;
+    left:50%;
+    top:55px;
+    transform:translateX(-50%);
+    border:7px solid #607d8b;
+    border-top:none;
+    border-radius:0 0 25px 25px;
+    overflow:hidden;
+    background:rgba(255,255,255,.35);
+}
+
+.water{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:0%;
+    background:linear-gradient(
+        rgba(43,161,219,.55),
+        rgba(13,112,176,.75)
+    );
+    transition:height .3s;
+}
+
+.ice{
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:15px;
+    height:210px;
+    display:flex;
+    flex-wrap:wrap;
+    align-content:flex-end;
+    justify-content:center;
+    gap:5px;
+    transition:.3s;
+}
+
+.iceCube{
+    width:38px;
+    height:38px;
+    border-radius:7px;
+    background:linear-gradient(
+        135deg,#f8ffff,#9de0f5
+    );
+    border:2px solid #78c7e2;
+    opacity:.9;
+}
+
+.particle-layer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.particle{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#075e9a;
+}
+
+/* vapor */
+
+.steam{
+    position:absolute;
+    left:50%;
+    top:12px;
+    width:280px;
+    height:120px;
+    transform:translateX(-50%);
+    pointer-events:none;
+}
+
+.steamParticle{
+    position:absolute;
+    width:11px;
+    height:11px;
+    background:#9ab9c8;
+    border-radius:50%;
+    opacity:.65;
+}
+
+/* aquecedor */
+
+.heater{
+    position:absolute;
+    left:50%;
+    bottom:18px;
+    transform:translateX(-50%);
+    width:230px;
+    height:47px;
+    border-radius:10px;
+    background:#3e484e;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.flame{
+    position:absolute;
+    bottom:48px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:43px;
+    opacity:.25;
+}
+
+.heater.on .flame{
+    opacity:1;
+}
+
+/* ==========================
+   TERMÔMETRO
+========================== */
+
+.thermometer-area{
+    background:#f4f7f9;
+    border-radius:13px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:12px 6px;
+}
+
+.temp-display{
+    font-size:25px;
+    font-weight:bold;
+    color:#d73f2d;
+    margin-bottom:10px;
+}
+
+.thermometer{
+    position:relative;
+    width:42px;
+    height:300px;
+    background:white;
+    border:4px solid #53626b;
+    border-radius:25px 25px 18px 18px;
+    overflow:hidden;
+}
+
+.mercury{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:10%;
+    background:linear-gradient(#ff7a39,#d92e21);
+    transition:height .2s;
+}
+
+.scale{
+    margin-top:8px;
+    font-size:12px;
+    color:#64747e;
+    text-align:center;
+}
+
+/* ==========================
+   BOTÕES
+========================== */
+
+.buttons{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:8px;
+    margin-top:12px;
+}
+
+button{
+    border:none;
+    padding:13px;
+    border-radius:9px;
+    font-weight:bold;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.start{
+    background:#14844d;
+    color:white;
+}
+
+.pause{
+    background:#e3a11b;
+    color:white;
+}
+
+.reset{
+    background:#667783;
+    color:white;
+}
+
+/* ==========================
+   CONTROLES
+========================== */
+
+.controls{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-top:11px;
+}
+
+.control{
+    background:#f3f7fa;
+    padding:11px;
+    border-radius:10px;
+    border:1px solid #d8e3e9;
+}
+
+.control-head{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.control-value{
+    color:#d6452e;
+}
+
+input[type=range]{
+    width:100%;
+}
+
+/* ==========================
+   DIREITA
+========================== */
+
+.energy{
+    background:#092f5e;
+    color:white;
+    border-radius:14px;
+    padding:15px;
+    text-align:center;
+}
+
+.energy small{
+    color:#bcd4e4;
+}
+
+.energy-value{
+    font-size:32px;
+    font-weight:bold;
+    color:#ffd05a;
+    margin-top:5px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+    border-top:4px solid #1776a6;
+}
+
+.card small{
+    color:#687984;
+    font-weight:bold;
+}
+
+.card-value{
+    font-size:19px;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+/* ==========================
+   PROGRESSO DE FASE
+========================== */
+
+.phase-progress{
+    background:#f3f7fa;
+    padding:12px;
+    border-radius:12px;
+}
+
+.progress-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.progress{
+    height:16px;
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    background:#ddd;
+}
+
+.solidBar{
+    background:#8dd8ee;
+}
+
+.liquidBar{
+    background:#168ac5;
+}
+
+.gasBar{
+    background:#aab9c0;
+}
+
+/* ==========================
+   GRÁFICO
+========================== */
+
+.chart-box{
+    background:white;
+    border-radius:13px;
+    padding:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.chart-title{
+    font-weight:bold;
+    margin-bottom:4px;
+}
+
+canvas{
+    width:100%;
+    height:250px;
+    display:block;
+}
+
+/* ==========================
+   EXPLICAÇÃO
+========================== */
+
+.explanation{
+    border-radius:13px;
+    padding:14px;
+    background:#fff4d9;
+    border:2px solid #e2aa35;
+}
+
+.explanation strong{
+    color:#755000;
+}
+
+.formula{
+    margin-top:7px;
+    font-size:22px;
+    font-weight:bold;
+    color:#143c5d;
+}
+
+@media(max-width:1000px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .controls,
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .experiment{
+        grid-template-columns:1fr 90px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>
+<h1>Laboratório de Calor Sensível e Latente</h1>
+<p>Curva de aquecimento da água e mudanças de estado físico</p>
+</div>
+
+<div class="author">
+Desenvolvido por Fabrizio Porfirio
+</div>
+</header>
+
+<main>
+
+<div class="grid">
+
+<!-- ==========================
+     ESQUERDA
+========================== -->
+
+<section class="panel">
+
+<div class="phase-box">
+
+<div>
+<div style="font-size:12px;color:#6b7b85">
+ETAPA DO PROCESSO
+</div>
+
+<div class="phase-title" id="phaseTitle">
+Gelo sendo aquecido
+</div>
+</div>
+
+<div class="phase-type" id="heatType">
+CALOR SENSÍVEL
+</div>
+
+</div>
+
+<div class="experiment">
+
+<div class="lab-area">
+
+<div class="steam" id="steam"></div>
+
+<div class="container">
+
+<div class="water" id="water"></div>
+
+<div class="ice" id="ice"></div>
+
+<div class="particle-layer" id="particles"></div>
+
+</div>
+
+<div class="heater" id="heater">
+<div class="flame">🔥🔥🔥</div>
+AQUECEDOR
+</div>
+
+</div>
+
+<div class="thermometer-area">
+
+<div class="temp-display" id="tempDisplay">
+-20,0 °C
+</div>
+
+<div class="thermometer">
+<div class="mercury" id="mercury"></div>
+</div>
+
+<div class="scale">
+Temperatura<br>da substância
+</div>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="start" id="start">
+▶ INICIAR AQUECIMENTO
+</button>
+
+<button class="pause" id="pause">
+⏸ PAUSAR
+</button>
+
+<button class="reset" id="reset">
+↻ REINICIAR
+</button>
+
+</div>
+
+<div class="controls">
+
+<div class="control">
+
+<div class="control-head">
+<span>Massa</span>
+<span class="control-value" id="massValue">
+1,0 kg
+</span>
+</div>
+
+<input
+type="range"
+id="mass"
+min="0.2"
+max="2"
+step="0.1"
+value="1">
+
+</div>
+
+<div class="control">
+
+<div class="control-head">
+<span>Potência</span>
+<span class="control-value" id="powerValue">
+1000 W
+</span>
+</div>
+
+<input
+type="range"
+id="power"
+min="500"
+max="3000"
+step="250"
+value="1000">
+
+</div>
+
+<div class="control">
+
+<div class="control-head">
+<span>Velocidade</span>
+<span class="control-value" id="speedValue">
+10×
+</span>
+</div>
+
+<input
+type="range"
+id="speed"
+min="1"
+max="30"
+step="1"
+value="10">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     DIREITA
+========================== -->
+
+<section style="display:grid;gap:12px">
+
+<div class="energy">
+<small>ENERGIA TÉRMICA FORNECIDA</small>
+<div class="energy-value" id="energyDisplay">
+0,0 kJ
+</div>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<small>Gelo</small>
+<div class="card-value" id="solidText">
+100%
+</div>
+</div>
+
+<div class="card">
+<small>Água</small>
+<div class="card-value" id="liquidText">
+0%
+</div>
+</div>
+
+<div class="card">
+<small>Vapor</small>
+<div class="card-value" id="gasText">
+0%
+</div>
+</div>
+
+</div>
+
+<div class="phase-progress">
+
+<div class="progress-labels">
+<span>Sólido</span>
+<span>Líquido</span>
+<span>Gasoso</span>
+</div>
+
+<div class="progress">
+<div class="solidBar" id="solidBar" style="width:100%"></div>
+<div class="liquidBar" id="liquidBar" style="width:0%"></div>
+<div class="gasBar" id="gasBar" style="width:0%"></div>
+</div>
+
+</div>
+
+<div class="chart-box">
+
+<div class="chart-title">
+Temperatura × Energia fornecida
+</div>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<div class="explanation">
+
+<strong id="explanationTitle">
+CALOR SENSÍVEL
+</strong>
+
+<div id="explanationText">
+A energia fornecida provoca aumento da temperatura do gelo, sem mudança de estado físico.
+</div>
+
+<div class="formula" id="formula">
+Q = m · c · ΔT
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+<script>
+
+/* =========================================
+   CONSTANTES FÍSICAS DIDÁTICAS
+========================================= */
+
+const C_ICE = 2100;      // J/kg°C
+const LF = 334000;       // J/kg
+const C_WATER = 4186;    // J/kg°C
+const LV = 2256000;      // J/kg
+const C_STEAM = 2000;    // J/kg°C
+
+const START_TEMP = -20;
+const FINAL_TEMP = 130;
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const massInput =
+document.getElementById("mass");
+
+const powerInput =
+document.getElementById("power");
+
+const speedInput =
+document.getElementById("speed");
+
+const massValue =
+document.getElementById("massValue");
+
+const powerValue =
+document.getElementById("powerValue");
+
+const speedValue =
+document.getElementById("speedValue");
+
+const tempDisplay =
+document.getElementById("tempDisplay");
+
+const energyDisplay =
+document.getElementById("energyDisplay");
+
+const mercury =
+document.getElementById("mercury");
+
+const phaseTitle =
+document.getElementById("phaseTitle");
+
+const heatType =
+document.getElementById("heatType");
+
+const explanationTitle =
+document.getElementById("explanationTitle");
+
+const explanationText =
+document.getElementById("explanationText");
+
+const formula =
+document.getElementById("formula");
+
+const heater =
+document.getElementById("heater");
+
+const water =
+document.getElementById("water");
+
+const ice =
+document.getElementById("ice");
+
+const steam =
+document.getElementById("steam");
+
+const particles =
+document.getElementById("particles");
+
+const canvas =
+document.getElementById("chart");
+
+const ctx =
+canvas.getContext("2d");
+
+/* =========================================
+   ESTADO
+========================================= */
+
+let running=false;
+let energy=0;
+let temperature=-20;
+
+let solidFraction=1;
+let liquidFraction=0;
+let gasFraction=0;
+
+let graphData=[];
+
+let lastTime=null;
+
+/* =========================================
+   CRIAR GELO
+========================================= */
+
+function createIce(){
+
+ice.innerHTML="";
+
+for(let i=0;i<30;i++){
+
+    const cube=
+    document.createElement("div");
+
+    cube.className="iceCube";
+
+    ice.appendChild(cube);
+
+}
+
+}
+
+/* =========================================
+   PARTÍCULAS DA ÁGUA
+========================================= */
+
+function createParticles(){
+
+particles.innerHTML="";
+
+for(let i=0;i<35;i++){
+
+    const p=
+    document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=
+    (10+Math.random()*80)+"%";
+
+    p.style.top=
+    (15+Math.random()*75)+"%";
+
+    particles.appendChild(p);
+
+}
+
+}
+
+/* =========================================
+   VAPOR
+========================================= */
+
+function updateSteam(){
+
+steam.innerHTML="";
+
+const amount=
+Math.round(gasFraction*30);
+
+for(let i=0;i<amount;i++){
+
+    const s=
+    document.createElement("div");
+
+    s.className="steamParticle";
+
+    s.style.left=
+    (10+Math.random()*80)+"%";
+
+    s.style.top=
+    (Math.random()*90)+"px";
+
+    steam.appendChild(s);
+
+}
+
+}
+
+/* =========================================
+   ENERGIA DOS ESTÁGIOS
+========================================= */
+
+function thresholds(){
+
+const m=
+Number(massInput.value);
+
+const Q1=
+m*C_ICE*20;
+
+const Q2=
+Q1+m*LF;
+
+const Q3=
+Q2+m*C_WATER*100;
+
+const Q4=
+Q3+m*LV;
+
+const Q5=
+Q4+m*C_STEAM*30;
+
+return {Q1,Q2,Q3,Q4,Q5};
+
+}
+
+/* =========================================
+   CALCULAR ESTADO
+========================================= */
+
+function calculateState(){
+
+const m=
+Number(massInput.value);
+
+const q=
+energy;
+
+const {
+Q1,Q2,Q3,Q4,Q5
+}=thresholds();
+
+
+if(q<Q1){
+
+    temperature=
+    START_TEMP+
+    q/(m*C_ICE);
+
+    solidFraction=1;
+    liquidFraction=0;
+    gasFraction=0;
+
+    phaseTitle.innerText=
+    "Gelo sendo aquecido";
+
+    sensible(
+    "A energia aumenta a temperatura do gelo. O estado físico permanece sólido."
+    );
+
+}
+
+
+else if(q<Q2){
+
+    temperature=0;
+
+    const f=
+    (q-Q1)/(Q2-Q1);
+
+    solidFraction=1-f;
+    liquidFraction=f;
+    gasFraction=0;
+
+    phaseTitle.innerText=
+    "Fusão do gelo";
+
+    latent(
+    "A energia continua sendo fornecida, mas a temperatura permanece em 0 °C enquanto o gelo se transforma em água.",
+    "Q = m · Lf"
+    );
+
+}
+
+
+else if(q<Q3){
+
+    temperature=
+    (q-Q2)/(m*C_WATER);
+
+    solidFraction=0;
+    liquidFraction=1;
+    gasFraction=0;
+
+    phaseTitle.innerText=
+    "Água líquida sendo aquecida";
+
+    sensible(
+    "Após a fusão completa, a energia volta a produzir aumento de temperatura."
+    );
+
+}
+
+
+else if(q<Q4){
+
+    temperature=100;
+
+    const f=
+    (q-Q3)/(Q4-Q3);
+
+    solidFraction=0;
+    liquidFraction=1-f;
+    gasFraction=f;
+
+    phaseTitle.innerText=
+    "Ebulição da água";
+
+    latent(
+    "Mesmo recebendo energia, a temperatura permanece em 100 °C enquanto ocorre a vaporização.",
+    "Q = m · Lv"
+    );
+
+}
+
+
+else{
+
+    temperature=
+    100+
+    (q-Q4)/(m*C_STEAM);
+
+    temperature=
+    Math.min(
+    temperature,
+    FINAL_TEMP
+    );
+
+    solidFraction=0;
+    liquidFraction=0;
+    gasFraction=1;
+
+    phaseTitle.innerText=
+    "Vapor sendo aquecido";
+
+    sensible(
+    "Toda a água já vaporizou. A energia fornecida volta a elevar a temperatura."
+    );
+
+}
+
+}
+
+/* =========================================
+   CALOR SENSÍVEL
+========================================= */
+
+function sensible(text){
+
+heatType.innerText=
+"CALOR SENSÍVEL";
+
+heatType.style.background=
+"#1677a8";
+
+explanationTitle.innerText=
+"CALOR SENSÍVEL";
+
+explanationText.innerText=
+text;
+
+formula.innerText=
+"Q = m · c · ΔT";
+
+}
+
+/* =========================================
+   CALOR LATENTE
+========================================= */
+
+function latent(text,f){
+
+heatType.innerText=
+"CALOR LATENTE";
+
+heatType.style.background=
+"#d47a13";
+
+explanationTitle.innerText=
+"CALOR LATENTE";
+
+explanationText.innerText=
+text;
+
+formula.innerText=f;
+
+}
+
+/* =========================================
+   VISUAL
+========================================= */
+
+function updateVisual(){
+
+tempDisplay.innerText=
+temperature.toFixed(1)
+.replace(".",",")+" °C";
+
+energyDisplay.innerText=
+(energy/1000)
+.toFixed(1)
+.replace(".",",")+" kJ";
+
+
+const thermoPercent=
+((temperature+20)/150)*100;
+
+mercury.style.height=
+Math.max(
+5,
+Math.min(
+100,
+thermoPercent
+)
+)+"%";
+
+
+/* porcentagens */
+
+const s=
+Math.round(solidFraction*100);
+
+const l=
+Math.round(liquidFraction*100);
+
+const g=
+Math.round(gasFraction*100);
+
+document.getElementById(
+"solidText"
+).innerText=s+"%";
+
+document.getElementById(
+"liquidText"
+).innerText=l+"%";
+
+document.getElementById(
+"gasText"
+).innerText=g+"%";
+
+document.getElementById(
+"solidBar"
+).style.width=s+"%";
+
+document.getElementById(
+"liquidBar"
+).style.width=l+"%";
+
+document.getElementById(
+"gasBar"
+).style.width=g+"%";
+
+
+/* água */
+
+water.style.height=
+(liquidFraction*82)+"%";
+
+
+/* gelo */
+
+ice.style.opacity=
+solidFraction;
+
+ice.style.transform=
+"scale("+
+(0.65+0.35*solidFraction)
++")";
+
+
+/* partículas */
+
+particles.style.opacity=
+liquidFraction;
+
+
+/* vapor */
+
+updateSteam();
+
+}
+
+/* =========================================
+   GRÁFICO
+========================================= */
+
+function resizeCanvas(){
+
+const rect=
+canvas.getBoundingClientRect();
+
+canvas.width=
+Math.max(400,rect.width*2);
+
+canvas.height=500;
+
+}
+
+function drawChart(){
+
+resizeCanvas();
+
+const W=canvas.width;
+const H=canvas.height;
+
+ctx.clearRect(0,0,W,H);
+
+const left=75;
+const right=25;
+const top=25;
+const bottom=65;
+
+const graphW=
+W-left-right;
+
+const graphH=
+H-top-bottom;
+
+
+/* fundo */
+
+ctx.fillStyle="#ffffff";
+ctx.fillRect(0,0,W,H);
+
+
+/* eixos */
+
+ctx.strokeStyle="#566875";
+ctx.lineWidth=3;
+
+ctx.beginPath();
+
+ctx.moveTo(left,top);
+ctx.lineTo(left,H-bottom);
+ctx.lineTo(W-right,H-bottom);
+
+ctx.stroke();
+
+
+ctx.fillStyle="#435866";
+ctx.font="24px Arial";
+
+ctx.fillText(
+"Temperatura (°C)",
+left,
+18
+);
+
+ctx.fillText(
+"Energia fornecida (kJ)",
+W/2-100,
+H-15
+);
+
+
+/* escala temperatura */
+
+for(let T=-20;T<=120;T+=20){
+
+const y=
+top+
+(120-T)/140*graphH;
+
+ctx.strokeStyle="#e0e8ed";
+ctx.lineWidth=1;
+
+ctx.beginPath();
+ctx.moveTo(left,y);
+ctx.lineTo(W-right,y);
+ctx.stroke();
+
+ctx.fillStyle="#61717c";
+ctx.font="20px Arial";
+
+ctx.fillText(
+T,
+15,
+y+7
+);
+
+}
+
+
+/* energia máxima */
+
+const maxEnergy=
+thresholds().Q5;
+
+if(graphData.length>1){
+
+ctx.strokeStyle="#0d72a5";
+ctx.lineWidth=5;
+
+ctx.beginPath();
+
+graphData.forEach((d,i)=>{
+
+const x=
+left+
+(d.q/maxEnergy)*graphW;
+
+const y=
+top+
+(120-d.t)/140*graphH;
+
+if(i===0)
+ctx.moveTo(x,y);
+else
+ctx.lineTo(x,y);
+
+});
+
+ctx.stroke();
+
+}
+
+}
+
+/* =========================================
+   LOOP
+========================================= */
+
+function animate(time){
+
+if(!running){
+
+lastTime=null;
+return;
+
+}
+
+if(lastTime===null)
+lastTime=time;
+
+const dt=
+(time-lastTime)/1000;
+
+lastTime=time;
+
+const power=
+Number(powerInput.value);
+
+const speed=
+Number(speedInput.value);
+
+
+/*
+P × t = energia
+*/
+
+energy +=
+power*dt*speed;
+
+
+const maxEnergy=
+thresholds().Q5;
+
+if(energy>=maxEnergy){
+
+energy=maxEnergy;
+running=false;
+
+heater.classList.remove(
+"on"
+);
+
+}
+
+
+calculateState();
+updateVisual();
+
+
+graphData.push({
+q:energy,
+t:temperature
+});
+
+if(graphData.length>700)
+graphData.shift();
+
+drawChart();
+
+
+if(running)
+requestAnimationFrame(animate);
+
+}
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+document.getElementById(
+"start"
+).addEventListener(
+"click",
+()=>{
+
+if(running)
+return;
+
+running=true;
+
+heater.classList.add(
+"on"
+);
+
+lastTime=null;
+
+requestAnimationFrame(
+animate
+);
+
+});
+
+
+document.getElementById(
+"pause"
+).addEventListener(
+"click",
+()=>{
+
+running=false;
+
+heater.classList.remove(
+"on"
+);
+
+lastTime=null;
+
+});
+
+
+document.getElementById(
+"reset"
+).addEventListener(
+"click",
+reset
+);
+
+/* =========================================
+   RESET
+========================================= */
+
+function reset(){
+
+running=false;
+
+heater.classList.remove(
+"on"
+);
+
+energy=0;
+temperature=-20;
+
+solidFraction=1;
+liquidFraction=0;
+gasFraction=0;
+
+graphData=[
+{
+q:0,
+t:-20
+}
+];
+
+lastTime=null;
+
+calculateState();
+updateVisual();
+drawChart();
+
+}
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+massInput.addEventListener(
+"input",
+()=>{
+
+massValue.innerText=
+Number(massInput.value)
+.toFixed(1)
+.replace(".",",")
++" kg";
+
+reset();
+
+});
+
+
+powerInput.addEventListener(
+"input",
+()=>{
+
+powerValue.innerText=
+powerInput.value+" W";
+
+});
+
+
+speedInput.addEventListener(
+"input",
+()=>{
+
+speedValue.innerText=
+speedInput.value+"×";
+
+});
+
+
+window.addEventListener(
+"resize",
+drawChart
+);
+
+/* =========================================
+   INICIAR
+========================================= */
+
+createIce();
+createParticles();
+
+reset();
+
+</script>
+
+</body>
+</html>
